@@ -2,15 +2,15 @@
 #
 # SPDX-License-Identifier: MIT
 
-"""Tests for `flask_vite_subdomain` package."""
+"""Tests for `flask_vite_hosts` package."""
 from pathlib import Path
 
 import pytest
 from click.testing import CliRunner
 from flask import Flask
 
-from flask_vite_subdomain import Vite, cli
-from flask_vite_subdomain.npm import NPMError
+from flask_vite_hosts import Vite, cli
+from flask_vite_hosts.npm import NPMError
 
 
 def test_extension():

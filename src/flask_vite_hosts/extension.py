@@ -21,13 +21,16 @@ class Vite:
     app: Flask | None = None
     npm: NPM | None = None
 
-    def __init__(self, app: Flask | None = None):
+    def __init__(self, app: Flask | None = None, host: str | None = None):
         self.app = app
+        self.host = host
 
         if app is not None:
-            self.init_app(app)
+            self.init_app(app, host=host)
 
-    def init_app(self, app: Flask):
+    def init_app(self, app: Flask, host: str | None = None):
+        self.host = host
+
         if "vite" in app.extensions:
             raise RuntimeError(
                 "This extension is already registered on this Flask app."
@@ -42,7 +45,7 @@ class Vite:
         npm_bin_path = config.get("VITE_NPM_BIN_PATH", "npm")
         self.npm = NPM(cwd=str(self._get_root()), npm_bin_path=npm_bin_path)
 
-        app.route("/_vite/<path:filename>")(self.vite_static)
+        app.route("/_vite/<path:filename>", endpoint='vite.static', host=host)(self.vite_static)
         app.template_global("vite_tags")(make_tag)
 
     def after_request(self, response: Response):

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "flask-vite"
+name = "flask-vite-hosts"
 version = "0.4.1"
 homepage = "https://github.com/abilian/flask-vite"
 description = "Flask+Vite integration."
@@ -15,12 +15,12 @@ classifiers = [
     'Programming Language :: Python :: 3.11',
 ]
 packages = [
-    { include = "flask_vite_subdomain", from = "src" },
+    { include = "flask_vite_hosts", from = "src" },
     { include = "tests", format = "sdist" },
 ]
 
 [tool.poetry.plugins."flask.commands"]
-vite = "flask_vite_subdomain.cli:vite"
+vite = "flask_vite_hosts.cli:vite"
 
 [tool.poetry.dependencies]
 python = "^3.9"
