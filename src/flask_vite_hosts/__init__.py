@@ -4,6 +4,6 @@
 
 from __future__ import annotations
 
-from .extension import Vite
+from .extension import Vite, ViteAssetHost
 
-__all__ = ["Vite"]
+__all__ = ["Vite", "ViteAssetHost"]
