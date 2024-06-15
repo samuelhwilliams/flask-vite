@@ -2,4 +2,4 @@
 #
 # SPDX-License-Identifier: MIT
 
-"""Unit test package for flask_vite."""
+"""Unit test package for flask_vite_subdomain."""

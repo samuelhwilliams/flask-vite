@@ -13,7 +13,7 @@ Plugin to simplify use of Vite from Flask.
 Instantiate the Flask extension as you do for other Flask extensions:
 
 ```python
-from flask_vite import Vite
+from flask_vite_subdomain import Vite
 
 app = Flask(...)
 vite = Vite(app)

@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template
 
-from flask_vite import Vite
+from flask_vite_subdomain import Vite
 
 app = Flask(__name__)
 vite = Vite(app)

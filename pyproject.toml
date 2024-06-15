@@ -15,12 +15,12 @@ classifiers = [
     'Programming Language :: Python :: 3.11',
 ]
 packages = [
-    { include = "flask_vite", from = "src" },
+    { include = "flask_vite_subdomain", from = "src" },
     { include = "tests", format = "sdist" },
 ]
 
 [tool.poetry.plugins."flask.commands"]
-vite = "flask_vite.cli:vite"
+vite = "flask_vite_subdomain.cli:vite"
 
 [tool.poetry.dependencies]
 python = "^3.9"
