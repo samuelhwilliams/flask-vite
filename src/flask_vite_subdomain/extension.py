@@ -21,13 +21,16 @@ class Vite:
     app: Flask | None = None
     npm: NPM | None = None
 
-    def __init__(self, app: Flask | None = None):
+    def __init__(self, app: Flask | None = None, subdomain: str | None = None):
         self.app = app
+        self.subdomain = subdomain
 
         if app is not None:
-            self.init_app(app)
+            self.init_app(app, subdomain=subdomain)
 
-    def init_app(self, app: Flask):
+    def init_app(self, app: Flask, subdomain: str | None = None):
+        self.subdomain = subdomain
+
         if "vite" in app.extensions:
             raise RuntimeError(
                 "This extension is already registered on this Flask app."
@@ -42,7 +45,7 @@ class Vite:
         npm_bin_path = config.get("VITE_NPM_BIN_PATH", "npm")
         self.npm = NPM(cwd=str(self._get_root()), npm_bin_path=npm_bin_path)
 
-        app.route("/_vite/<path:filename>")(self.vite_static)
+        app.route("/_vite/<path:filename>", endpoint='vite.static', subdomain=subdomain)(self.vite_static)
         app.template_global("vite_tags")(make_tag)
 
     def after_request(self, response: Response):
@@ -63,7 +66,7 @@ class Vite:
         response.content_length = len(response.response[0])
         return response
 
-    def vite_static(self, filename):
+    def vite_static(self, filename, **kwargs):
         dist = str(self._get_root() / "dist" / "assets")
         return send_from_directory(dist, filename, max_age=ONE_YEAR)
 
